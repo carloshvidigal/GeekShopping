@@ -1,8 +1,12 @@
+using Duende.IdentityServer.Models;
+
 namespace GeekShopping.IdentityServer.Models
 {
     public class ErrorViewModel
     {
-        public string? RequestId { get; set; }
+        public ErrorMessage? Error { get; set; }
+
+        public string? RequestId => Error?.RequestId;
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     }
