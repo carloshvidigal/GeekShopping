@@ -13,7 +13,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connection = builder.Configuration["MySQlConnection:MySQlConnectionString"];
+var connection = builder.Configuration.GetConnectionString("MySQLConnectionString");
+
 
 builder.Services.AddDbContext<MySQLContext>(options =>
     options.UseMySql(
