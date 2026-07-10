@@ -21,6 +21,7 @@ namespace GeekShopping.Web.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
+        [Authorize]
         public async Task<IActionResult> ProductIndex()
         {
             var products = await _productService.FindAllProducts("");
@@ -78,7 +79,7 @@ namespace GeekShopping.Web.Controllers
         }
 
         [HttpPost]
-       // [Authorize(Roles = Role.Admin)]
+        [Authorize(Roles = Role.Admin)]
         public async Task<IActionResult> ProductDelete(ProductModel model)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
