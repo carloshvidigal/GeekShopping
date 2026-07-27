@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/GeekShopping.IdentityServer/keys/is-signing-key-48F744C84B974FDCAA83CC21E085CBB3.json
