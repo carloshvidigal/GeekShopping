@@ -27,13 +27,10 @@ namespace GeekShopping.CartAPI.Repository
 
         public async Task<bool> ClearCart(string userId)
         {
-            var cartHeader = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.UserId == userId);
+            var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
             if (cartHeader != null)
             {
-                _context.CartDetails
-                    .RemoveRange(
-                    _context.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id));
+                _context.CartDetails.RemoveRange(_context.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id));
                 _context.CartHeaders.Remove(cartHeader);
                 await _context.SaveChangesAsync();
                 return true;
@@ -45,11 +42,9 @@ namespace GeekShopping.CartAPI.Repository
         {
             Cart cart = new()
             {
-                CartHeader = await _context.CartHeaders
-                    .FirstOrDefaultAsync(c => c.UserId == userId),
+                CartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId),
             };
-            cart.CartDetails = _context.CartDetails
-                .Where(c => c.CartHeaderId == cart.CartHeader.Id)
+            cart.CartDetails = _context.CartDetails.Where(c => c.CartHeaderId == cart.CartHeader.Id)
                     .Include(c => c.Product);
             return _mapper.Map<CartVO>(cart);
         }
@@ -63,18 +58,15 @@ namespace GeekShopping.CartAPI.Repository
         {
             try
             {
-                CartDetail cartDetail = await _context.CartDetails
-                    .FirstOrDefaultAsync(c => c.Id == cartDetailsId);
+                CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c => c.Id == cartDetailsId);
 
-                int total = _context.CartDetails
-                    .Where(c => c.CartHeaderId == cartDetail.CartHeaderId).Count();
+                int total = _context.CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId).Count();
 
                 _context.CartDetails.Remove(cartDetail);
                 
                 if (total == 1)
                 {
-                    var cartHeaderToRemove = await _context.CartHeaders
-                        .FirstOrDefaultAsync(c => c.Id == cartDetail.CartHeaderId);
+                    var cartHeaderToRemove = await _context.CartHeaders.FirstOrDefaultAsync(c => c.Id == cartDetail.CartHeaderId);
                     _context.CartHeaders.Remove(cartHeaderToRemove);
                 }
                 await _context.SaveChangesAsync();
