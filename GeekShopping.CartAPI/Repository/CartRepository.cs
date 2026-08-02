@@ -81,6 +81,7 @@ namespace GeekShopping.CartAPI.Repository
         public async Task<CartVO> SaveOrUpdateCart(CartVO vo)
         {
             Cart cart = _mapper.Map<Cart>(vo);
+            cart.CartHeader.CouponCode ??= string.Empty;
             //Checks if the product is already saved in the database if it does not exist then save
             var product = await _context.Products.FirstOrDefaultAsync(
                 p => p.Id == vo.CartDetails.FirstOrDefault().ProductId);
