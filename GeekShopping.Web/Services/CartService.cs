@@ -25,6 +25,14 @@ namespace GeekShopping.Web.Services
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var response = await _client.GetAsync($"{BasePath}/find-cart/{userId}");
+            if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                return new CartViewModel
+                {
+                    CartHeader = null,
+                    CartDetails = new List<CartDetailViewModel>()
+                };
+            }
             return await response.ReadContentAs<CartViewModel>();
         }
 
