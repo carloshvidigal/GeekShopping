@@ -9,7 +9,7 @@ namespace GeekShopping.CartAPI.Messages
     public class CheckoutHeaderVO 
     {
         public string UserId { get; set; }
-        public string? CouponCode { get; set; }
+        public string CouponCode { get; set; }
         public decimal PurchaseAmount { get; set; }
         public decimal DiscountAmount { get; set; }
         public string FirstName { get; set; }
@@ -22,6 +22,6 @@ namespace GeekShopping.CartAPI.Messages
         public string ExpiryMothYear { get; set; }
 
         public int CartTotalItens { get; set; }
-        public IEnumerable<CartDetailVO>? CartDetails { get; set; }
+        public IEnumerable<CartDetailVO> CartDetails { get; set; }
     }
 }
