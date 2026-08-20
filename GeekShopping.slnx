@@ -11,6 +11,7 @@
     <Project Path="GeekShopping.CartAPI/GeekShopping.CartAPI.csproj" Id="91e6dff0-faac-4129-873e-b1d8186c11fa" />
     <Project Path="GeekShopping.CouponAPI/GeekShopping.CouponAPI.csproj" Id="a73ecbd4-81f2-4086-8bd4-f6eb39f8c29d" />
     <Project Path="GeekShopping.IdentityServer/GeekShopping.IdentityServer.csproj" Id="ec63193e-b069-4a9c-9f6b-b840e7b16663" />
+    <Project Path="GeekShopping.OrderAPI/GeekShopping.OrderAPI.csproj" Id="23270a8a-6d53-4ce8-b07c-5355f25f06b0" />
     <Project Path="GeekShopping.ProductAPI/GeekShopping.ProductAPI.csproj" />
   </Folder>
 </Solution>
