@@ -1,4 +1,5 @@
 ﻿using GeekShopping.CartAPI.Data.ValueObjects;
+using GeekShopping.MessageBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GeekShopping.CartAPI.Messages
 {
-    public class CheckoutHeaderVO 
+    public class CheckoutHeaderVO : BaseMessage
     {
         public string UserId { get; set; }
         public string CouponCode { get; set; }
