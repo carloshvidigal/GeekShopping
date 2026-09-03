@@ -7,6 +7,9 @@
     <File Path="IMessageBus.cs" />
     <Project Path="GeekShopping.MessageBus/GeekShopping.MessageBus.csproj" Id="d2e1d6c2-858c-445e-9001-3ca88164df4c" />
   </Folder>
+  <Folder Name="/Payments/">
+    <Project Path="GeekShopping.PaymentProcessor/GeekShopping.PaymentProcessor.csproj" Id="aa9cb645-92ed-465b-9eaa-8bb72d1dacdf" />
+  </Folder>
   <Folder Name="/Services/">
     <Project Path="GeekShopping.CartAPI/GeekShopping.CartAPI.csproj" Id="91e6dff0-faac-4129-873e-b1d8186c11fa" />
     <Project Path="GeekShopping.CouponAPI/GeekShopping.CouponAPI.csproj" Id="a73ecbd4-81f2-4086-8bd4-f6eb39f8c29d" />
