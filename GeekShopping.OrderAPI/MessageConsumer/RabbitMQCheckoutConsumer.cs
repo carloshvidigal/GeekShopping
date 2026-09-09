@@ -1,6 +1,7 @@
 ﻿using GeekShopping.OrderAPI.Messages;
 using GeekShopping.OrderAPI.Model;
 using GeekShopping.OrderAPI.Repository;
+using Microsoft.Extensions.DependencyInjection;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
@@ -12,13 +13,13 @@ namespace GeekShopping.OrderAPI.MessageConsumer
 {
     public class RabbitMQCheckoutConsumer : BackgroundService
     {
-        private readonly OrderRepository _repository;
+        private readonly IServiceScopeFactory _scopeFactory;
         private IConnection _connection;
         private IModel _channel;
 
-        public RabbitMQCheckoutConsumer(OrderRepository repository)
+        public RabbitMQCheckoutConsumer(IServiceScopeFactory scopeFactory)
         {
-            _repository = repository;
+            _scopeFactory = scopeFactory;
             var factory = new ConnectionFactory
             {
                 HostName = "localhost",
@@ -27,7 +28,7 @@ namespace GeekShopping.OrderAPI.MessageConsumer
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "checkoutqueue", false, false, false, arguments: null);
+            _channel.QueueDeclare(queue: "checkoutqueue", durable: true, exclusive: false, autoDelete: false, arguments: null);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -79,7 +80,9 @@ namespace GeekShopping.OrderAPI.MessageConsumer
                 order.OrderDetails.Add(detail);
             }
 
-            await _repository.AddOrder(order);
+            using var scope = _scopeFactory.CreateScope();
+            var repository = scope.ServiceProvider.GetRequiredService<IOrderRepository>();
+            await repository.AddOrder(order);
         }
     }
 }
