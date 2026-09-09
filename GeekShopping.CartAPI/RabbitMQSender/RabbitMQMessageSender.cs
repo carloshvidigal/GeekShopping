@@ -29,7 +29,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
             if (ConnectionExists())
             {
                 using var channel = _connection.CreateModel();
-                channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
+                channel.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false, arguments: null);
                 byte[] body = GetMessageAsByteArray(message);
                 channel.BasicPublish(exchange: "", routingKey: queueName, basicProperties: null, body: body);
 
