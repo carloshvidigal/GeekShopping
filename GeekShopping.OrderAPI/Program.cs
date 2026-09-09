@@ -1,5 +1,6 @@
 using GeekShopping.OrderAPI.MessageConsumer;
 using GeekShopping.OrderAPI.Model.Context;
+using GeekShopping.OrderAPI.RabbitMQSender;
 using GeekShopping.OrderAPI.Repository;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<MySQLContext>(options =>
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+
+builder.Services.AddSingleton<IRabbitMQMessageSender,RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
