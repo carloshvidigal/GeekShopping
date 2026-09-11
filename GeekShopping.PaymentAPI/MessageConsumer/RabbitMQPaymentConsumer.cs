@@ -28,7 +28,7 @@ namespace GeekShopping.PaymentAPI.MessageConsumer
             };
             _connection = factory.CreateConnection();
             _channel = _connection.CreateModel();
-            _channel.QueueDeclare(queue: "orderpaymentprocessqueue", false, false, false, arguments: null);
+            _channel.QueueDeclare(queue: "orderpaymentprocessqueue", durable: true, exclusive: false, autoDelete: false, arguments: null);
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
