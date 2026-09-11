@@ -19,6 +19,8 @@ builder.Services.AddDbContext<MySQLContext>(options =>
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 
 builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer>();
+
 
 builder.Services.AddSingleton<IRabbitMQMessageSender,RabbitMQMessageSender>();
 
