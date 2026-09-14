@@ -1,3 +1,6 @@
+using GeekShopping.Email.Model.Context;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -6,6 +9,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Connection String
+var connection = builder.Configuration.GetConnectionString("MySQLConnection");
+
+// DbContext
+builder.Services.AddDbContext<MySQLContext>(options =>
+    options.UseMySql(
+        connection,
+        ServerVersion.AutoDetect(connection)
+    ));
 
 var app = builder.Build();
 
